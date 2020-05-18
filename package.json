@@ -5,24 +5,29 @@
   "author": "carrot-farm <chohoki@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open",
+    "dev": "webpack-dev-server --mode development --hot --open",
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
-  },
-  "devDependencies": {
+    "@emotion/core": "^10.0.28",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
     "awesome-typescript-loader": "^5.2.1",
+    "gsap": "^3.2.6",
+    "react": "^16.13.1",
+    "react-carrot-ui": "^1.0.11",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^3.9.2"
+  },
+  "devDependencies": {
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "react-hot-loader": "^4.12.21",
-    "typescript": "^3.9.2",
+    "svg-url-loader": "^5.0.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"

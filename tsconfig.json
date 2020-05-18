@@ -1,24 +1,21 @@
 {
-	"compilerOptions": {
-		"strict": true, // 엄격모드
-		"lib": [ // 컴파일 시 사용될 라이브러리
-			"es5",
-			"es2015",
-			"es2016",
-			"es2017",
-			"es2020",
-			"dom"
-		],
-		"jsx": "react", // 문법
-		"esModuleInterop": false, // export 값을 export default 로 사용가능하게 해준다.
-		"rootDirs": ["node_modules/@types"], // 타입 지정 최상위 디렉토리
-		"sourceMap": true,
-		"removeComments": true
-	},
-  "include": [ // 컴파일 대상
-    "src/**/*"
-  ],
-  "exclude":  [ // 컴파일 대상 제외 리스트
-		"node_modules"
-	]
+  "compilerOptions": {
+    "target": "es5",                          
+    "lib": [
+      "dom",
+      "es5",
+      "es6"
+    ],                             
+    "jsx": "react",             
+    "sourceMap": true,                     
+    "outDir": "./dist", 
+    // "importHelpers": true,     
+    "strict": true,              
+    // "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+  },
+ "include": ["./src/**/*"]
 }
