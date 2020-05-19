@@ -3353,6 +3353,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-carrot-ui@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-carrot-ui/-/react-carrot-ui-1.0.11.tgz#69d3d7414f25670caf8ec4f65a252eebcc2673a7"
+  integrity sha512-+NR3mCNYQun2HC/pDfEwBUEIYYXah4cjdWi7o9QjGB2oFphyC1O17qGTqLKU03wYQGo6tFsN22AwJPLpQWUrAw==
+
 react-dom@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"

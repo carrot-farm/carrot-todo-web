@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const App: React.FunctionComponent = () => {
   
-  return <div>바보야..</div>;
+  return <div> 당근 </div>;
 };
 
 export default App;
