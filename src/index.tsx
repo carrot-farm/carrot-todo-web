@@ -7,6 +7,6 @@ import App from './App';
 const Hot = hot(App); // react-hot-loader 적용
 
 ReactDOM.render(
-  <Hot />,
+  <App />,
   document.getElementById("root")
 );
