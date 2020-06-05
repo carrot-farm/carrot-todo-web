@@ -16,6 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "typeRoots": ["./node_modules/types", "./src/Types"]
   },
  "include": ["./src/**/*"]
 }

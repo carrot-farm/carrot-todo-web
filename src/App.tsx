@@ -1,9 +1,24 @@
 import * as React from 'react';
-import * as UI from 'react-carrot-ui';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { ThemeProvider } from 'react-carrot-ui';
+
+import client from './modules';
+import Routes from './routes';
 
 const App: React.FunctionComponent = () => {
   
-  return <div> 당근 </div>;
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <ThemeProvider primaryColor="white">
+            <Routes />
+          </ThemeProvider>
+        </ApolloProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  )
 };
 
 export default App;
