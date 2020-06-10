@@ -6,15 +6,19 @@ import {
   Container, 
   IconButton,
   Drawer,
-  Icon
 } from 'react-carrot-ui';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
+import { TCategory } from '../../../types/category';
 import SideNav from '../../mocules/SideNav';
-import { COMMON } from '../../../modules/common/commonQuery';
+import { CLIENT_COMMON } from '../../../modules/common/commonQuery';
 import { SET_DRAWER_SW } from '../../../modules/common/commonMutation';
+import { DELETE_CATEGORY, CLIENT_DELETE_CATEGORY } from '../../../modules/category/categoryMutation';
+import List from '../../mocules/List';
+import ListItem from '../../atoms/ListItem';
+
 
 // ===== type
 type TTodoTemplate = {
@@ -48,10 +52,25 @@ function TodoTemplate({
   onSubmitButtonClick,
   onLoginButtonClick,
 }: TTodoTemplate) {
-  const { data } = useQuery(COMMON);
+  
+  const { data } = useQuery(CLIENT_COMMON);
   const [ setDrawerSw ] = useMutation(SET_DRAWER_SW);
+  const [ clientDeleteCategory ] = useMutation(CLIENT_DELETE_CATEGORY);
+  const [ deleteCategory ] = useMutation(DELETE_CATEGORY, {
+    onCompleted: (res) => {
+      const id = res.deleteCategory.id;
+      setDrawerSw({
+        variables: {
+          sw: false
+        }
+      });
+      console.log('> deleteCategory:', id)
+      // client 카테고리 삭제
+      clientDeleteCategory({ variables: {id} });
+    }
+  });
   const history = useHistory();
-  // console.log('> render')
+  // console.log('> render', data.categories)
 
   // # 마운트
   useEffect(() => {
@@ -86,6 +105,23 @@ function TodoTemplate({
   const handleBackButtonClick = useCallback(() => {
     history.goBack();
   }, [history]);
+
+  // # 카테고리 삭제
+  const deleteCategoryButtonClick = useCallback((id: number) => {
+    if(confirm('정말 삭제 하시겠습니까?')) {
+      console.log('> ', id)
+      deleteCategory({ 
+        variables: {
+          id
+        }
+      })
+    }
+  }, []);
+
+  // # 카테고시 선택
+  const handleCategoryClick = useCallback((e: React.MouseEvent<HTMLLIElement>) => {
+    console.log('> click: ', e.currentTarget)
+  }, [data]);
 
   return (
     <div>
@@ -146,12 +182,51 @@ function TodoTemplate({
         anchor="left"
         onClose={handleCloseDrawer}
       >
-        <SideNav onCloseDrawer={handleCloseDrawer} />
+        {/* side nav  */}
+        <SideNav onCloseDrawer={handleCloseDrawer} >
+          <List>
+            {data.categories.length && data.categories.map((c: TCategory) => (
+              <ListItem 
+                key={c.id} 
+                flexAlign={'space-between'} 
+                onClick={handleCategoryClick}
+              >
+                <div>
+                  {c.category}
+                </div>
+                <div css={[categoryModifyLinkStyle, listItemButtonsStyle]} >
+                  <IconButton 
+                    iconName="close"
+                    color="grey-darken-2" 
+                    rippleColor="grey" 
+                    backgroundColor="transparent"
+                    onClick={() => deleteCategoryButtonClick(c.id)}
+                  />
+
+                  <Link to={`/category/update/${c.id}`}>
+                    <IconButton 
+                      iconName="pen" 
+                      color="grey-darken-2" 
+                      rippleColor="grey" 
+                      backgroundColor="transparent" 
+                    />
+                  </Link>
+                </div>
+              </ListItem>
+            ))}
+          </List>
+        </SideNav>
       </Drawer>
     </div>
   )
 }
 
 // ===== style
+const categoryModifyLinkStyle = css`
+  z-index: 1;
+`
+const listItemButtonsStyle = css`
+  display: flex;
+`
 
 export default TodoTemplate;

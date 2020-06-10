@@ -1,8 +1,6 @@
 import React from 'react';
 import { Base } from 'react-carrot-ui';
 
-import TodoTemplate from '../../templates/TodoTemplate';
-
 // ===== type
 type TListProps = {
   /** 생성될 HTML 명. default: "ul" */

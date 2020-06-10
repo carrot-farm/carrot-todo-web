@@ -24,13 +24,14 @@ export const tokenReissue = async ({
   client,
 }: TTokenReissueParam) => {
   try {
+    // console.log('> call tokenReissue ')
     // # 토큰 재발급 요청
     await client.query({
       query: REISSUE_TOKEN,
     });
     // # 다시 리퀘스트
     await client.query(failureOperation);
-    console.log('> tokenReissue: ')
+    // console.log('> tokenReissue success ')
   } catch(e) {
     throw new Error(e);
   }

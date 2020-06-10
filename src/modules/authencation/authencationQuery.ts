@@ -3,14 +3,13 @@ import { gql } from 'apollo-boost';
 /** 서버에서 나의 회원 정보 받아 오기 */
 export const MY_INFO = gql`
 query {
-  myInfo{
+  myInfo {
     id
     email
     user_id
   }
 }
 `;
-
 
 /** accessToken/refresh 발급 요청 */
 export const GET_TOKEN = gql`
@@ -36,3 +35,10 @@ export const CLIENT_USER = gql`
   }
 }
 `;
+
+/** 현재 인증되어 있는지 확인 */
+export const IS_AUTHENCATED = gql`
+  {
+    isAuthencated
+  }
+`

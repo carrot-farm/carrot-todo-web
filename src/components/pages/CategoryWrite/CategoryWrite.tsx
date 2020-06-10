@@ -1,7 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { AppBar, Divider, FormCreator } from 'react-carrot-ui';
+import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
 
 import TodoTemplate from '../../templates/TodoTemplate';
+import { CLIENT_CATEGORIES } from '../../../modules/category/categoryQuery';
+import { CREATE_CATEGORY } from '../../../modules/category/categoryMutation';
+import client from '../../../modules';
 
 // ===== type
 type TCategoryWriteProps = {
@@ -9,7 +14,20 @@ type TCategoryWriteProps = {
 };
 
 // ===== component
-function CategoryWrite() {
+function CategoryWrite({...args}) {
+  const history = useHistory();
+  const [ createCategory ] = useMutation(CREATE_CATEGORY, {
+    onCompleted: async (res) => { 
+      const addedItem = res.createOnetodo_category
+      const data =  await client.readQuery({ query: CLIENT_CATEGORIES });
+      client.writeData({ 
+        data: {
+          categories: [...data.categories, addedItem]
+        }
+      });
+      history.replace('/') 
+    }
+  });
   const formRef = useRef<HTMLFormElement>(null);
   const model = [
     { 
@@ -43,8 +61,12 @@ function CategoryWrite() {
   };
 
   // # handle submit
-  const handleSubmit = (values: any) => {
-    console.log('> submit: ', values);
+  const handleSubmit = ({ input }: any) => {
+    createCategory({
+      variables: {
+        input
+      }
+    })
   };
 
   // # header submit 버튼을 눌렀을 때
@@ -78,3 +100,4 @@ function CategoryWrite() {
 }
 
 export default CategoryWrite;
+// export default CategoryWrite;

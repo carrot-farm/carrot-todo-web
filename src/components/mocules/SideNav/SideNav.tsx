@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom';
 type TSideMenu = {
   /** drawer 닫기 */
   onCloseDrawer: () => void,
+  /** 내부 컴포넌트 */
+  children?: React.ReactNode
 };
-
-
 
 // ===== component
 function SideNav({ 
-  onCloseDrawer
+  onCloseDrawer,
+  children
  }: TSideMenu) {
 
   return (
@@ -27,7 +28,8 @@ function SideNav({
       </div>
       <Divider color="grey-lighten-2" />
 
-      
+      {/* ===== 내부 컴포넌트 ===== */}
+      {children}
     </div>
   );
 }

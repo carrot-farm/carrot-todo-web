@@ -1,12 +1,10 @@
 /** @jsx jsx */
 import React, { useCallback, useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
-import { Button, Base } from 'react-carrot-ui';
-import axios from 'axios';
+import { Button, Base, Divider } from 'react-carrot-ui';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 
-import { MY_INFO, CLIENT_USER, GET_TOKEN } from '../../../modules/authencation/authencationQuery';
+import { MY_INFO, GET_TOKEN } from '../../../modules/authencation/authencationQuery';
 import { SET_USER } from '../../../modules/authencation/authencationMutation';
 
 // ===== 환경 변수
@@ -18,6 +16,8 @@ const {
 type TLoginForm = {
   /** 구글 로그인 */
   goobleLogin?: boolean;
+  /** 로그인 완료 이벤트 콜백 */
+  onCompleted?: () => any;
 };
 
 // # 토큰 정보
@@ -31,40 +31,51 @@ type TReceiveToken = {
 };
 
 // ===== component
+/** 로그인 폼 컴포넌트 */
 function LoginForm({
   goobleLogin = false,
-}) {
-  const { data: userData  } = useQuery(CLIENT_USER);
-  const [ setUser ] = useMutation(SET_USER); // 로컬 유저 정보 셋팅
+  onCompleted
+}: TLoginForm) {
+  const [ setUser ] = useMutation(SET_USER, { 
+    onCompleted, 
+  }); // 로컬 유저 정보 셋팅
   const [ getToken ] = useLazyQuery(GET_TOKEN, { // access/refresh 토큰 발급요청
-    onCompleted: (...args) => console.log('> get token success:', args),
+    onCompleted: (res) => {
+      console.log('> getToken completed:', res)
+      if(res.getTokens) {
+        getMyInfo();
+      }
+    },
     onError: (...args) => console.error('> getToken Error:', args)
   });
-  const [ getMyInfo ] = useLazyQuery(MY_INFO, { // 나의 
+  const [ getMyInfo ] = useLazyQuery(MY_INFO, { // 나의 정보 가져온 뒤 셋티
     onCompleted: (res) => {
-      console.log('> getMyInfo:', res)
+      console.log('> getMyInfo completed:', res)
       if(res.myInfo) {
         // # 로컬에 유저 정보 셋팅
         setUser({
           variables: {
             user: res.myInfo
           }
-        })
+        });
       }
     },
-    onError: err => console.dir(err, {depth: true})
+    onError: err => console.error(err)
   });
-  const [ invalidToken ] = useLazyQuery(gql`
-    query {  
-      testInvalidToken
-    }
-  `)
-  // const { data, fetchMore } = useQuery(TEST);
-  console.log('> myInfo: ', userData)
+  
+  // # 마운트
+  useEffect(() => {
+    window.addEventListener('message', receiveDisposableToken);
+    // getMyInfo();
+    // # unmount
+    return () => {
+      window.removeEventListener('message', receiveDisposableToken);
+    };
+  }, []);
+
 
   // # 로그인 팝업창의 포스트 메시지 통신
   const receiveDisposableToken = ({ data }: { data: TReceiveToken }) => {
-    console.log('> login', data);
     if(data && data.token) {
       try{
         getToken({
@@ -73,24 +84,12 @@ function LoginForm({
               'Authorization': `Bearer ${data.token}`
             }
           }
-        })
+        });
       } catch(e) {
         alert('토큰을 가져오는데 실패하였습니다.')
       }
     }
   };
-  
-  // # 마운트
-  useEffect(() => {
-    window.addEventListener('message', receiveDisposableToken);
-    invalidToken();
-    // console.log('> mount', );
-    // getMyInfo();
-    // # unmount
-    return () => {
-      window.removeEventListener('message', receiveDisposableToken);
-    };
-  }, [])
 
   // # 구글 로그인 활성화
   const handleGoogleLogin = useCallback(() => {
@@ -101,13 +100,18 @@ function LoginForm({
     )
   }, [goobleLogin])
 
+  // # 랜더링
   return (
-    <div className="mocules-loginform-root">
+    <div className="mocules-loginform-root" css={rootStyle}>
       <Base 
         component="h2" 
         marginBottom={6}
         textAlign="center"
       >로그인</Base>
+
+      <Base marginBottom={6}>
+        <Divider color="grey-lighten-1" />
+      </Base>
 
       {goobleLogin && 
         <div>
@@ -128,5 +132,10 @@ function LoginForm({
 
 // ===== 변수
 const { GOOGLE_LOGIN_URI } = process.env;
+
+// ===== 스타일
+const rootStyle = css`
+  // overflow: hidden;
+`
 
 export default LoginForm;
