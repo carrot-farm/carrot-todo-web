@@ -42,6 +42,7 @@ const client = new ApolloClient({
     defaults,
     resolvers,
   },
+  // # 오퍼레이션 인터셉터.
   request: async operation => {
     operation.setContext({
       fetchOptions: {

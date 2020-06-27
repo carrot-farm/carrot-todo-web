@@ -22,13 +22,14 @@
     "graphql": "^15.0.0",
     "gsap": "^3.2.6",
     "react": "^16.13.1",
-    "react-carrot-ui": "^1.2.4",
+    "react-carrot-ui": "^1.2.24",
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "typescript": "^3.9.2"
   },
   "devDependencies": {
+    "@types/gsap": "^1.20.2",
     "@types/node": "^14.0.6",
     "cross-env": "^7.0.2",
     "file-loader": "^6.0.0",

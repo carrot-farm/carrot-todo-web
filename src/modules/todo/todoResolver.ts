@@ -51,7 +51,7 @@ export const categoryMutationResolver = {
         selectedCategory: findedCategory
       },
     });
-    // console.log('> clientSelectCategory', findedCategory);
+    console.log('> clientSelectCategory', findedCategory);
     return findedCategory
   }
 

@@ -33,13 +33,12 @@ export const CLIENT_CATEGORIES = gql`
     }
   }
 `;
-
-/** 지정된 카테고리 가져오기 */
-export const CLIENT_CATEGORY = gql`
-  query ClientCategory($id: ID!){
-    clientCategory(id: $id) @client {
-      id
-      category
-    }
+/** 선택된 카테고리 */
+export const CLIENT_SELECTED_CATEGORY = gql`
+query {
+  selectedCategory @client {
+    id
+    category
   }
-`
+}
+`;

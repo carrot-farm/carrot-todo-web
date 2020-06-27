@@ -88,3 +88,12 @@ export const CLIENT_UPDATE_CATEGORY = gql`
     }
   }
 `;
+// # 카테고리 선택
+export const CLIENT_SELECT_CATEGORY = gql`
+mutation ClientSelectCategory($categoryId: Int!) {
+  clientSelectCategory(categoryId: $categoryId) @client {
+    id
+    category
+  }
+}
+`

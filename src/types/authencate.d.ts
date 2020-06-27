@@ -7,3 +7,8 @@ export type TUser = {
   /** 이메일 */
   email: string;
 } | null;
+
+
+export type TUserState = TUser & {
+  __typename: 'user'
+};

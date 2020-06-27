@@ -36,19 +36,22 @@ function LoginForm({
   goobleLogin = false,
   onCompleted
 }: TLoginForm) {
+  // 로컬 유저 정보 셋팅
   const [ setUser ] = useMutation(SET_USER, { 
     onCompleted, 
-  }); // 로컬 유저 정보 셋팅
-  const [ getToken ] = useLazyQuery(GET_TOKEN, { // access/refresh 토큰 발급요청
+  }); 
+  // access/refresh 토큰 발급요청
+  const [ getToken ] = useLazyQuery(GET_TOKEN, { 
     onCompleted: (res) => {
-      console.log('> getToken completed:', res)
       if(res.getTokens) {
+        console.log('> getToken completed:', res)
         getMyInfo();
       }
     },
     onError: (...args) => console.error('> getToken Error:', args)
   });
-  const [ getMyInfo ] = useLazyQuery(MY_INFO, { // 나의 정보 가져온 뒤 셋티
+  // 나의 정보 가져온 뒤 셋팅
+  const [ getMyInfo ] = useLazyQuery(MY_INFO, { 
     onCompleted: (res) => {
       console.log('> getMyInfo completed:', res)
       if(res.myInfo) {

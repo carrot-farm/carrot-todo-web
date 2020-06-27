@@ -55,5 +55,5 @@ const writeButtonStyle = css`
   }
 `
 
-export default SideNav;
+export default React.memo(SideNav);
 

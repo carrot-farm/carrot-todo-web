@@ -24,8 +24,16 @@ function Routes() {
       />
       <Route path="/category/update/:id" component={CategoryUpdate} />
 
-      <Route exact path="/todos/:category_id" component={Todos} />
-      <Route path="/todo/write/:category_id" component={TodoWrite} />
+      <AuthRoute 
+        path="/todos/:category_id"
+        failuerePath="/"
+        component={Todos} 
+      />
+      <AuthRoute 
+        path="/todo/write/:category_id" 
+        failuerePath="/"
+        component={TodoWrite} 
+      />
       <Route path="/todo/update/:id" component={TodoUpdate} />
 
     </Switch>

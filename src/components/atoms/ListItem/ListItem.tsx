@@ -19,6 +19,8 @@ type TListItemProps = {
   ripple?: boolean;
   /** divider 여부 */
   divider?: boolean;
+  /** padding 적용 여부 */
+  fullWidth?: boolean;
   /** 클릭 이벤트 */
   onClick?:(e: any) => void
 };
@@ -31,6 +33,7 @@ function ListItem({
   flexAlign,
   ripple = true,
   divider = true,
+  fullWidth = false,
   onClick,
   ...args
 }: TListItemProps) {
@@ -40,7 +43,7 @@ function ListItem({
       <Base 
         {...args} 
         component={component} 
-        css={rootStyle} 
+        css={rootStyle({ fullWidth })} 
         onClick={onClick}
         flexAlign={flexAlign}
       >
@@ -57,13 +60,15 @@ function ListItem({
 }
 
 // ===== style
-const rootStyle = css`
+const rootStyle = ({ fullWidth }: any) => css`
   position: relative;
   overflow: hidden;
   height: 55px;
   display: flex;
   align-items: center;
-  padding: 0 15px;
+  ${!fullWidth && 
+    'padding: 0 15px;'
+  }
   cursor: pointer;
 `
 

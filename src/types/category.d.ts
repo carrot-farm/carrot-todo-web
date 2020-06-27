@@ -4,16 +4,6 @@ export type TCategory = {
   category: string;
 }
 
-/** 카테고리 배령 */
+/** 카테고리 배열 */
 export type TCategories = TCategory[];
 
-declare global {
-  /** 카테고리 */
-  type TCategory = {
-    id: number;
-    category: string;
-  }
-
-  /** 카테고리 리스트 */
-  type TCategories = TCategory[];
-}

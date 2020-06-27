@@ -2,7 +2,8 @@
  * resolver 관련 유틸
  =============================== */
 
-type TDeleteListItemParams = {
+
+type TCacheListItemParams = {
   /** 배열을 가져올 graphql 쿼리 */
   query: any;
   /** 아폴로 클라이어언트 캐시 인스턴스 */
@@ -10,12 +11,14 @@ type TDeleteListItemParams = {
   /** 캐시에 저장된 배열의 이름 */
   listName: string;
 };
+
+
 /** cache에서 배열을 읽고 그중 해당하는 아이템하나를 삭제 */
 export const deleteListItem = (f: (a: any) => boolean | undefined, {
   query,
   cache,
   listName,
-}: TDeleteListItemParams) => {
+}: TCacheListItemParams) => {
   const data = cache.readQuery({ query });
   const list = data[listName];
   const itemIndex = list.findIndex(f);
@@ -30,7 +33,7 @@ export const deleteListItem = (f: (a: any) => boolean | undefined, {
 };
 
 
-type TUpdateListItem = TDeleteListItemParams;
+type TUpdateListItem = TCacheListItemParams;
 /** cacache에서 배열을 읽고 해당하는 아이템을 업데이트한다. */
 export const updateListItem = (f: (a: any) => any, {
   query,
@@ -47,3 +50,15 @@ export const updateListItem = (f: (a: any) => any, {
   })
   return updatedList;
 };
+
+/** 지정된 아이템을 찾아서 반환 */
+export const findListItem = (f: (a: any) => boolean | undefined,{
+  query,
+  cache,
+  listName
+ }: TCacheListItemParams) => {
+   const data = cache.readQuery({ query });
+   const list = data[listName];
+   const findedItem = list.find(f);
+  return findedItem;
+ }
