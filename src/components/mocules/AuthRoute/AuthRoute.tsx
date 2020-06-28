@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 import { RouteProps } from '../../../../node_modules/@types/react-router';
-import { IS_AUTHENCATED } from '../../../modules/authencation/authencationQuery';
+import { IS_AUTHENCATED } from '../../../graphql/authencation/query';
 
 // ===== type
 type TAuthRouteProps = RouteProps & {

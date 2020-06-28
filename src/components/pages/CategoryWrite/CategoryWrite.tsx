@@ -4,9 +4,9 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 
 import TodoTemplate from '../../templates/TodoTemplate';
-import { CLIENT_CATEGORIES } from '../../../modules/category/categoryQuery';
-import { CREATE_CATEGORY } from '../../../modules/category/categoryMutation';
-import client from '../../../modules';
+import { CLIENT_CATEGORIES } from '../../../graphql/category/query';
+import { CREATE_CATEGORY } from '../../../graphql/category/mutation';
+import client from '../../../graphql';
 
 // ===== type
 type TCategoryWriteProps = {
@@ -56,7 +56,7 @@ function CategoryWrite({...args}) {
   // # 체인지 이벤트
   const handleChanges = {
     input: () => {
-      console.log('> input')
+      // console.log('> input');
     }
   };
 

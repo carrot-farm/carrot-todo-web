@@ -62,7 +62,7 @@ export const setCookie = (name: string, value: string, options: TSetCookieOption
     cookie += `; samesite=${sameSite}`;
   }
 
-  console.log('> setCookie: ', cookie)
+  // console.log('> setCookie: ', cookie);
 
   document.cookie = `${cookie};path=${path}`;
 }

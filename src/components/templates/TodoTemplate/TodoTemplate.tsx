@@ -13,13 +13,13 @@ import { useHistory } from 'react-router-dom';
 
 import { TCategory } from '../../../types/category';
 import SideNav from '../../mocules/SideNav';
-import { CLIENT_COMMON } from '../../../modules/common/commonQuery';
-import { SET_DRAWER_SW } from '../../../modules/common/commonMutation';
+import { CLIENT_COMMON } from '../../../graphql/common/query';
+import { SET_DRAWER_SW } from '../../../graphql/common/mutation';
 import { 
   DELETE_CATEGORY, 
   CLIENT_DELETE_CATEGORY, 
   CLIENT_SELECT_CATEGORY,
-} from '../../../modules/category/categoryMutation';
+} from '../../../graphql/category/mutation';
 import List from '../../mocules/List';
 import ListItem from '../../atoms/ListItem';
 

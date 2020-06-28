@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ThemeProvider } from 'react-carrot-ui';
 
-import client from './modules';
+import client from './graphql';
 import Routes from './routes';
-import { GET_INITIALIZE_DATA } from './modules/common/commonQuery';
+import { GET_INITIALIZE_DATA } from './graphql/common/query';
 
 const App: React.FunctionComponent = () => {
 
@@ -18,7 +18,7 @@ const App: React.FunctionComponent = () => {
       query: GET_INITIALIZE_DATA,
     })
     .then((res) => {
-      console.log('> initialize data\n',res.data);
+      // console.log('> initialize data\n',res.data);
       if(res.data.myInfo) {
         // # 초기 데이터 입력
         client.writeData({

@@ -1,13 +1,9 @@
 import { deleteListItem, updateListItem, findListItem } from '../../utils/apolloUtils';
 
-import { CLIENT_CATEGORIES } from '../category/categoryQuery';
-
-// ===== query
-export const queryResolver = {
-}
+import { CLIENT_CATEGORIES } from '../category/query';
 
 // ===== mutation
-export const categoryMutationResolver = {
+const mutationResolver = {
   // # 카테고리 삭제
   deleteCategory: (_:any, args: {id:number}, ctx: any) => {
     return deleteListItem((a) => a.id === args.id, {
@@ -44,15 +40,17 @@ export const categoryMutationResolver = {
       query: CLIENT_CATEGORIES,
       cache: ctx.cache,
       listName: 'categories',
-    })
+    });
     // 선택된 카테고리 쓰기
     ctx.cache.writeData({
       data: {
         selectedCategory: findedCategory
       },
     });
-    console.log('> clientSelectCategory', findedCategory);
+    // console.log('> clientSelectCategory', findedCategory);
     return findedCategory
   }
 
 }
+
+export default mutationResolver;

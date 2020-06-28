@@ -4,8 +4,8 @@ import { jsx, css } from '@emotion/core';
 import { Button, Base, Divider } from 'react-carrot-ui';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
 
-import { MY_INFO, GET_TOKEN } from '../../../modules/authencation/authencationQuery';
-import { SET_USER } from '../../../modules/authencation/authencationMutation';
+import { MY_INFO, GET_TOKEN } from '../../../graphql/authencation/query';
+import { SET_USER } from '../../../graphql/authencation/mutation';
 
 // ===== 환경 변수
 const {

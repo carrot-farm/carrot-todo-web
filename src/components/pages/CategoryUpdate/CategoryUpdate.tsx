@@ -4,12 +4,9 @@ import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 
 import TodoTemplate from '../../templates/TodoTemplate';
 import { RouteComponentProps } from '../../../../node_modules/@types/react-router-dom';
-import { GET_CATEGORY } from '../../../modules/category/categoryQuery';
-import { UPDATE_CATEGORY } from '../../../modules/category/categoryMutation';
+import { GET_CATEGORY } from '../../../graphql/category/query';
+import { UPDATE_CATEGORY } from '../../../graphql/category/mutation';
 
-// ===== type
-type TCategoryUpdateProps = {
-};
 // # match.parms 정의
 type TMatchParams = {
   id: string;

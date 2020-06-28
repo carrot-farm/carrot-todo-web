@@ -1,7 +1,7 @@
 import { ApolloClient } from '../../node_modules/apollo-client';
 import { Operation } from '../../node_modules/apollo-link/lib/types';
 
-import { REISSUE_TOKEN } from '../modules/authencation/authencationQuery'
+import { REISSUE_TOKEN } from '../graphql/authencation/query'
 
 
 // ===== 토큰 저장

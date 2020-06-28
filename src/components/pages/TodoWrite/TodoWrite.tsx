@@ -5,8 +5,8 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { TUser } from '../../../types';
 import TodoTemplate from '../../templates/TodoTemplate';
-import { CREATE_TODO } from '../../../modules/todo/todoMutation';
-import { CLIENT_USER } from '../../../modules/authencation/authencationQuery';
+import { CREATE_TODO } from '../../../graphql/todo/mutation';
+import { CLIENT_USER } from '../../../graphql/authencation/query';
 
 // ===== type
 

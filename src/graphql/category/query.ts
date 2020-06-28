@@ -33,6 +33,7 @@ export const CLIENT_CATEGORIES = gql`
     }
   }
 `;
+
 /** 선택된 카테고리 */
 export const CLIENT_SELECTED_CATEGORY = gql`
 query {

@@ -1,14 +1,14 @@
-import ApolloClient, { gql } from 'apollo-boost';
+import ApolloClient from 'apollo-boost';
 
-import commonState from './common/commonState';
-import commonResolver from './common/commonResolver';
+import commonState from './common/state';
+import commonResolver from './common/mutationResolver';
 
-import authencationState from './authencation/authencationState';
-import authencationResolver from './authencation/authencationResolver';
+import authencationState from './authencation/state';
+import authencationMutationResolver from './authencation/mutationResolver';
 
-import { queryResolver, categoryMutationResolver } from './category/categoryResolver';
+import categoryMutationResolver from './category/mutationResolver';
 
-import { tokenReissue } from '../utils/authUtils';
+// import { tokenReissue } from '../utils/authUtils';
 
 // ===== 변수
 const {
@@ -18,11 +18,11 @@ const {
 // ===== 리졸버 정의
 const resolvers = {
   Query: {
-    ...queryResolver,
+    // ...queryResolver,
   },
   Mutation: {
     ...commonResolver,
-    ...authencationResolver,
+    ...authencationMutationResolver,
     ...categoryMutationResolver
   }
 };

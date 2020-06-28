@@ -1,13 +1,9 @@
 import { deleteListItem, updateListItem, findListItem } from '../../utils/apolloUtils';
 
-import { CLIENT_CATEGORIES } from '../category/categoryQuery';
+import { CLIENT_CATEGORIES } from '../category/query';
 
-// ===== query
-export const queryResolver = {
-}
-
-// ===== mutation
-export const categoryMutationResolver = {
+// ===== mutationResolver
+const mutationResolver = {
   // # 카테고리 삭제
   deleteCategory: (_:any, args: {id:number}, ctx: any) => {
     return deleteListItem((a) => a.id === args.id, {
@@ -55,4 +51,6 @@ export const categoryMutationResolver = {
     return findedCategory
   }
 
-}
+};
+
+export default mutationResolver;

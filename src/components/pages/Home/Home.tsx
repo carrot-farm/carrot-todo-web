@@ -10,9 +10,9 @@ import TodoTemplate from '../../templates/TodoTemplate';
 import LoginForm from '../../mocules/LoginForm';
 import List from '../../mocules/List';
 import ListItem from '../../atoms/ListItem';
-import { CLIENT_USER } from '../../../modules/authencation/authencationQuery';
-import { CLIENT_SELECTED_CATEGORY } from '../../../modules/category/categoryQuery';
-import { TODOS } from '../../../modules/todo/todoQuery';
+import { CLIENT_USER } from '../../../graphql/authencation/query';
+import { CLIENT_SELECTED_CATEGORY } from '../../../graphql/category/query';
+import { TODOS } from '../../../graphql/todo/query';
 
 // ===== type
 
@@ -73,7 +73,7 @@ function Home() {
 
   // # 할일 삭제
   const handleDeleteTodo = useCallback((id) => {
-    console.log('> handleDeleteTodo: ', id)
+    // console.log('> handleDeleteTodo: ', id);
   }, [todosData])
 
   return (

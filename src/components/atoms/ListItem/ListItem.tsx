@@ -8,7 +8,7 @@ import { flexAlignType } from '../../../../node_modules/react-carrot-ui/dist/typ
 import TodoTemplate from '../../templates/TodoTemplate';
 
 // ===== type
-type TListItemProps = {
+interface TListItemProps {
   /** 내부 컴포넌트 */
   children?: React.ReactNode,
   /** 컴포넌트 */
